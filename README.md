@@ -218,12 +218,12 @@ Your application is now running locally, but you're still only printing out the 
 
 ### MongoDB
 
-The first thing to do is to <a href="http://docs.mongodb.org/manual/installation/">set up MongoDB locally</a>. Once you have it set up, go to the console and enter the Mongo shell by typing <code>mongo</code>. You can view databases that are available to you by issuing <code>show databases</code>. You can access an existing database or create a new one with the <code>use</code> expression. We'll create a local database called jspsych:
+The first thing to do is to <a href="http://docs.mongodb.org/manual/installation/">set up MongoDB locally</a>. Once you have it set up, go to the console and enter the Mongo shell by typing <code>mongosh</code>. You can view databases that are available to you by issuing <code>show databases</code>. You can access an existing database or create a new one with the <code>use</code> expression. We'll create a local database called jspsych:
 <code>use jspsych</code>.
 
 Once you're in the database, you can view its contents by typing <code>show collections</code>. Since the database is empty, Mongo will not respond with anything in particular. Let's add an a collection called 'fruit_shop' with a few documents, and re-issue the command to show collections:
 ```
-db.fruit_shop.insert([{item:'banana', quantity:15, price: '0.25'}, {item:'orange', quantity:8, price :'0.35'}, {item:'apple', quantity: 25, price:'0.12'}])
+db.fruit_shop.insertMany([{item:'banana', quantity:15, price: '0.25'}, {item:'orange', quantity:8, price :'0.35'}, {item:'apple', quantity: 25, price:'0.12'}])
 ```
 You can now issue <code>show collections</code> again and you'll see we've created a collection called fruit_shop. 
 If you issue <code>db.fruit_shop.find()</code>, you'll receive a list of the objects in the fruit_shop collection - the ones we inserted there a moment ago. 
@@ -278,7 +278,7 @@ The reason I'm illustrating how the data is laid out in the DB is so you'll have
 MongoDB simply works as a data storage, where every participant has their own document, containing their data and object id. Now that this has been established, let's look at how to remove elements from the collection:
 
 <code>
-db.fruit_shop.remove({"item":"banana"})
+db.fruit_shop.deleteOne({"item":"banana"})
 </code>
 
 Our fruit shop is now out of bananas. You can see this by issuing <code>db.fruit_shop.find()</code>. But how about we stop with this fruit vendor business altogether and first look at how to empty our inventory...
